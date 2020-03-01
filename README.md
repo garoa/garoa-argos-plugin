@@ -22,5 +22,5 @@ Caso o botão não funcione, abra este link:
 ### Screenshot:
 ![Screencast](https://raw.githubusercontent.com/biazzotto/garoa-argos-plugin/master/screenshot.png)
 
-#### Ícone utilizado
-[Ícone Umbrella](https://icons8.com/icon/389/umbrella), por [Icons8](https://icons8.com.br).
+### Ícone utilizado
+[Umbrella icon](https://fontawesome.com/icons/umbrella), por [FontAwesome](https://fontawesome.com), sob licença [Creative Commons Attribution 4.0](https://fontawesome.com/license).

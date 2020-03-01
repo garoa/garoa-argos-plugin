@@ -1,64 +1,65 @@
 #!/usr/bin/env python3
 
-# Umbrella icon by Icons8: https://icons8.com/icon/389/umbrella
+# Umbrella icon by FontAwesome: https://fontawesome.com/icons/umbrella
+# Creative Commons Attribution 4.0: https://fontawesome.com/license
 
 # <bitbar.title>Garoa Hacker Clube Status</bitbar.title>
-# <bitbar.version>v1.2</bitbar.version>
+# <bitbar.version>v1.3</bitbar.version>
 # <bitbar.author>Fabricio Biazzotto</bitbar.author>
 # <bitbar.author.github>biazzotto</bitbar.author.github>
 # <bitbar.desc>Exibe o status atualizado do Garoa Hacker Clube.</bitbar.desc>
-# <bitbar.image>https://i.imgur.com/FR0EPIs.png</bitbar.image>
-# <bitbar.dependencies>python3,requests,json</bitbar.dependencies>
+# <bitbar.image>https://i.imgur.com/8nFc3VO.png</bitbar.image>
+# <bitbar.dependencies>python3,requests</bitbar.dependencies>
 
 try:
-    from requests import get
+    from requests3 import get
     from requests.exceptions import ConnectionError
 except ModuleNotFoundError:
     print('ERRO')
     print('---')
     print('Clique aqui para instalar <hh>requests</hh>.|bash="sudo python3'
-          ' -m pip install requests" terminal=true refresh=true')
+          ' -m pip install requests&&exit" terminal=true refresh=true')
 
 from json import loads
 
 
-gray = 'iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+g' + \
-       'vaeTAAABi0lEQVQ4jc2UsWvTURSFv3u1QoiLoZtE2qIUWghYXGymTEJrBUeXimP3' + \
-       'QqAOOQmvdNVChrhUHToWl4JLIUOLf4AITk7VbBkUpMOPPIcmIm1SXkoHz/R499zv' + \
-       '3MeDCwmStCPpTYr3eooJuJfow0YVWq3WRKfTeWhmszHGlwBmtmlmX3u93idJWRIw' + \
-       'hHA7y7IN4Blwa0ReF9gFtiT9GAms1+svYoxNIHfRs/7Rb2BN0vvBxbXBQdIGsA1M' + \
-       'JMLoe59WKpWTdrt99HdCSU+AD2cnHkPRzFZqtdq+SboBfAHuXhI20LdCoTDnZrZ8' + \
-       'BTCAmW63+8hjjMtXABvosQPTwGt3L+Xz+ZvuvgA0gQw4NrNVdy8B88Bz4Hu/tg3c' + \
-       '7/eUgFfADJLmhkU1Go1yCKEIIOmjpH2AEEJR0uKwnlGsYcZDSYcpXk8ijqH/H3hu' + \
-       'fUl6wOmPLUn6OS5w2ISTQNnMyv0AB4qcbpjxgblc7gg4jjG+ldQEDoA7wN6lgNVq' + \
-       '9Ze7LwGfgVVgyszWJb1LAf4BpclzdLyVffIAAAAASUVORK5CYII='
+gray = 'iVBORw0KGgoAAAANSUhEUgAAABQAAAASCAYAAABb0P4QAAABkklEQVQ4y6WUu0ub' + \
+       'YRSHn/dNQtpRa+jQC162LqW6dLAgdSkWl86CS4eCQgadHMIvAROHVsEbfIP/gAhF' + \
+       'EAcXQXBw6aAgLraUBhLEIYKgX/iat8uHhGguTX7juTwv55z3HEMTeZ4XKxQKR0AF' + \
+       'eCspaBRvm8GKxeIw8AYYMsa88zwv1ijHPGSUNAJMAR+BxzXuG2AHWJV00BCYzWYT' + \
+       '5XJ5AxinNW0DnyVd3gNK6gf2gZf8n34D7yX9vAPmcrku3/d/AL20p1/AoKSSBfB9' + \
+       'f6UDGEAfsAJgJL0CTppNvAU5a+1rG06zUxiAqVQqXywwBiwBiXg83g18q34VWACe' + \
+       'AQngaw1kEXgCPAWWgbGotXYilUodVgXNSooCyRAwD3wP4Z+AMjAHLEmaqcpLZjKZ' + \
+       'zXof+xGwFrajB/gTul4AF8A6MC3ptqVNqYE/rwZKyre9y+0oWm9i6XT6QyQSOQ2C' + \
+       '4G/HQEmjzrndIAjOjTFrzjnC81VqBqxX8ll4VQacc4uhbU/SdVtASXljzDhwDFwB' + \
+       'W8BkKyX/A8OHf+qE3/CsAAAAAElFTkSuQmCC'
 
-green = 'iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+g' + \
-        'vaeTAAABXklEQVQ4jdXTP2tUQRSG8d/cmIB/QbCLWxgUYcWFiCBmRY2NRdTeRklh' + \
-        '4ScQ8gXsTBTTWBi1sLKwCdiod2RBC9uIlZXaRNIZFBaPhRsw7q65K9v4VMPMe57z' + \
-        'NkMVSktK96pEt1USJocq5f4qfGvUVyeFw8J+ULqG98Jr09q9d//Jc+NGzOEy9vZZ' + \
-        'tyZ5bMRNp3zuLyzNYhHb+zbfzLrkujMebVwUv8nmcH8AGewQHspubG6YXRKedjWu' + \
-        'TvjhonOWkxVjVq3g4D/KNvhgXb2wamYIMpiw0/lCmBmC7BfhQiE5INyWNHy3S3JM' + \
-        'WEQbH3FF0lA4IrmKT523O8JkZ6YhWZBM8Eq957YXmrIayJ4pLXfONdlUz5l+ri6y' + \
-        'lqxVJVpsHRmM/1H40nFZyxt7hiNkn9D0TROEQqgJa1WE3X+3Zbe2dxjDE9RxVpg1' + \
-        '7cHgQsiOYl44gS+Su067JYmthD8BML5Xrn1Fjy8AAAAASUVORK5CYII='
+green = 'iVBORw0KGgoAAAANSUhEUgAAABQAAAASCAYAAABb0P4QAAABaUlEQVQ4y63UT0uU' + \
+        'URTH8c+dcaSgTeXYwor+7NpEtglU9KlNFL4GNy2C6W0EEWWR6a530EaIFgrO47gS' + \
+        'pEVBtNGIXIkLA6EWznNbzEPh6Pxx9Le6nHPP957DOecGnbSmZNeqIJO5I7HX7nqh' + \
+        'C9goboluC8asKbULCYdaqyYEFTzE6Sbvb3wQvDWu1h5YU5Z5h0ndKJiXeSSxfRC4' + \
+        '4pq6Ki47mn4oumvMxn/girPqPuGK3vRdNCyx02jKnpljwOCqYKaRYc0NmS8dO95Z' + \
+        'UXCzIFM5AVgjuehxAQ/wSlRWdE70sunVZ/oMicqCF02Qaf3OK7mANw3WkpFD5vC1' + \
+        'VJR6ruqM1KLUQn5+mvumD8QtGWk12KcEs6IKBgQ/83wvGbRlyxyeSPzpblP2wy/u' + \
+        'AyY2e9/lHtTXcgCW3Vf3FfXjA1P3BB8VrWM2t2bY6QRsVfK3/Fe5zr9uLkjs9gZM' + \
+        'bMpM4jN+4b2SqW5K/gs/n2H7bpiKpgAAAABJRU5ErkJggg=='
 
-red = 'iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+g' + \
-      'vaeTAAABY0lEQVQ4jdXUv2vTQRjH8ddd24C1FgS32qFBKVRaSXGxWXRy8MfuYung' + \
-      '0LmD0H/AVQsuDv4anBxcCg6OAR2kuVgqmXRRxyxCKbT2HNKAtol+U7L4mY7nPs/7' + \
-      'eY7n7iigxNMGj4t4h4uYcD4XNPYEfmCkxOWfTOMs1LkbabZ4d5W9bnnhcCAxEVjN' + \
-      '3MbpHvVaeLnP/Xm+9wQmlvAIJ/52rN+0HVi+yItOIHYWDVbxpA8YjGaeJ+790WGD' + \
-      'W5nXhzvuQzlzs8J62KK0yxbOHRPW0eeTzMRdrg8ABuVtrkVt4KB0I2Iq8zAyFxjD' + \
-      'vPak9/AVdyJz+1wILOLbwd5aphIYO8h9kCnbYKZbqTrVTSYh8abBOmwyWWehW04v' + \
-      '1hElaolaEW/8t6U//YfADS4lau8ZHwhwiDOojlKFTAztabeKAI+83SandviEUuBV' + \
-      'bl+FK5mlCs+O07WPzCbeJn4kviRWcsGP4xczKFY6tfyQCAAAAABJRU5ErkJggg=='
+red = 'iVBORw0KGgoAAAANSUhEUgAAABQAAAASCAYAAABb0P4QAAABb0lEQVQ4y63UO2tU' + \
+      'QRiA4WfGXVAIhKjBwgvG0iJr1EKIgpdGI/kNNhbC+jcEERNFjZ3/II0gIloIdkLY' + \
+      'W4iFoEGSKggmNgpZz1gkyLKe7B43vuU3M+8w32WCPixQLvEe2TfOXaLda38sIDuP' + \
+      'CZwZ4cIC5V5nQl6wzkVUA9exr2v5R+BF4Mk473oKa4xGnmFaAQLPN7l5lq9/CVuc' + \
+      'SLxNHPNvfIlcHufzH2GLkYwajhuM5cTpCdYjZDzehQzGwpZDqHEystiv4gVIkUrc' + \
+      'Q/U/yCAkbsXEFB60tyq8HzOdt+JuxuE2o4n7XZLZMgcCh/AoMaXOZE4fPmyQmtxb' + \
+      'YqjJmwavlxiqc6dBajCbc24yt7GX2bvB3DDV7xxMrGy3xNESa5s8Heb2GD8LTUon' + \
+      'TY50CiusDjzLg1DKrT9hkattPuDXroV1rkReBj4l5rbDWYn1AvO9Y94+dv00r05x' + \
+      'rZ8wN4cVVgPTiRY2EvOBG0We/BtUr2OKb+a2RgAAAABJRU5ErkJggg=='
 
 try:
     status = loads(get('https://garoahc.appspot.com/status').content)['open']
     if status:
         img = green
     else:
-        img = red
+        img = green
 except ConnectionError:
     img = gray
 
