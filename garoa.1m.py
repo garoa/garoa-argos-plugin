@@ -7,7 +7,7 @@
 # <bitbar.author>Fabricio Biazzotto</bitbar.author>
 # <bitbar.author.github>biazzotto</bitbar.author.github>
 # <bitbar.desc>Exibe o status atualizado do Garoa Hacker Clube.</bitbar.desc>
-# <bitbar.image>https://i.imgur.com/OhCj6y1.png</bitbar.image>
+# <bitbar.image>https://i.imgur.com/FR0EPIs.png</bitbar.image>
 # <bitbar.dependencies>python3,requests,json</bitbar.dependencies>
 
 try:
