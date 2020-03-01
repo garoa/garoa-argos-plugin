@@ -12,12 +12,13 @@
 
 try:
     from requests import get
+    from requests.exceptions import ConnectionError
 except ModuleNotFoundError:
     print('ERRO')
     print('---')
-    print('Clique aqui para instalar `requests`|bash="sudo python3 -m pip '
-          'install requests" terminal=true refresh=true')
-from requests.exceptions import ConnectionError
+    print('Clique aqui para instalar <hh>requests</hh>.|bash="sudo python3'
+          ' -m pip install requests" terminal=true refresh=true')
+
 from json import loads
 
 
