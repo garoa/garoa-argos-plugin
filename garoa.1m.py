@@ -1,63 +1,56 @@
 #!/usr/bin/env python3
 
-# Umbrella icon by Icons8: https://icons8.com/icons/set/umbrella
+# Umbrella icon by Icons8: https://icons8.com/icon/389/umbrella
 
 # <bitbar.title>Garoa Hacker Clube Status</bitbar.title>
-# <bitbar.version>v1.0</bitbar.version>
+# <bitbar.version>v1.2</bitbar.version>
 # <bitbar.author>Fabricio Biazzotto</bitbar.author>
 # <bitbar.author.github>biazzotto</bitbar.author.github>
 # <bitbar.desc>Exibe o status atualizado do Garoa Hacker Clube.</bitbar.desc>
 # <bitbar.image>https://i.imgur.com/OhCj6y1.png</bitbar.image>
 # <bitbar.dependencies>python3,requests,json</bitbar.dependencies>
 
-from sys import executable
 try:
     from requests import get
 except ModuleNotFoundError:
     print('ERRO')
     print('---')
-    print(f'Clique aqui para instalar `requests`|bash="{executable} '
-           '-m pip install requests" terminal=false refresh=true')
+    print('Clique aqui para instalar `requests`|bash="sudo python3 -m pip '
+          'install requests" terminal=true refresh=true')
 from requests.exceptions import ConnectionError
 from json import loads
 
 
-gray = 'iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAABmJLR0QA/wD/AP+' + \
-       'gvaeTAAAB30lEQVRIie2Vv2sUQRiGn/k2d4UiiKi4BMUcVgcqFmphtDjEYJqAtZ' + \
-       '2KIGkkIHLC3rtwXHOk086/QbGxUTjMkSIqWCjXWAQMwV/ERk7wXFiL7EqIrOeuO' + \
-       'UHwhYGdeef9HmZgvoWckvRE0rO8ubG8AeBMgQxWJFREbtgGSbuAaeAwcAi4kFj3' + \
-       'gNfAK+ChpE+FQJImgVvAWYZfcQQ8NrNmEASLvwWStBu4C8wMKZ6l++Vy+Uq9Xl/' + \
-       'LBEk6AjwADhaEpFo2s5kgCF7+BGo2m+NRFC0B438ISfUOOCnpzQ+QpDHgOXB0iy' + \
-       'CpXgAnJEUG4Jy7OgIIwDHgMoBLTrMC7BsBCOBttVrdb8650yOEAPi9Xu+UxXF8f' + \
-       'oSQVNMGTAAfnXM3Pc+r+L5f9jyvAswBqxs2LwBTwI5kTAHdDf4KcB2YSGs4524A' + \
-       'H4CKC8OwUSqVbm9+YADtdnt7v9+/45xbbjQaIax3b2CbpOPJXMABYFbSl801khY' + \
-       '2m/sOJMWS4ry5v9a9/4P+YZCkrqRulr9lINYb4qSkvelCq9Xak3x+zgv61S96ET' + \
-       'gHzEuaA6LBYKDEe5oXlHkiMwuAr8BF4D2wBlwDvplZmBfkZRmdTme1Vqs9iuPYB' + \
-       '3YCA2DJzC4FQbCQF/Qd09KEuNw0COAAAAAASUVORK5CYII='
+gray = 'iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+g' + \
+       'vaeTAAABi0lEQVQ4jc2UsWvTURSFv3u1QoiLoZtE2qIUWghYXGymTEJrBUeXimP3' + \
+       'QqAOOQmvdNVChrhUHToWl4JLIUOLf4AITk7VbBkUpMOPPIcmIm1SXkoHz/R499zv' + \
+       '3MeDCwmStCPpTYr3eooJuJfow0YVWq3WRKfTeWhmszHGlwBmtmlmX3u93idJWRIw' + \
+       'hHA7y7IN4Blwa0ReF9gFtiT9GAms1+svYoxNIHfRs/7Rb2BN0vvBxbXBQdIGsA1M' + \
+       'JMLoe59WKpWTdrt99HdCSU+AD2cnHkPRzFZqtdq+SboBfAHuXhI20LdCoTDnZrZ8' + \
+       'BTCAmW63+8hjjMtXABvosQPTwGt3L+Xz+ZvuvgA0gQw4NrNVdy8B88Bz4Hu/tg3c' + \
+       '7/eUgFfADJLmhkU1Go1yCKEIIOmjpH2AEEJR0uKwnlGsYcZDSYcpXk8ijqH/H3hu' + \
+       'fUl6wOmPLUn6OS5w2ISTQNnMyv0AB4qcbpjxgblc7gg4jjG+ldQEDoA7wN6lgNVq' + \
+       '9Ze7LwGfgVVgyszWJb1LAf4BpclzdLyVffIAAAAASUVORK5CYII='
 
-red = 'iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAABmJLR0QA/wD/AP+' + \
-      'gvaeTAAABpklEQVRIie3WsWtTURTH8c99Bgtql6hVKYINriouFmy0WivFLv0nFG' + \
-      'cRRBBsB1f/AxH/gSIOFoRqXlISqBYcdHMQLKJE1MFJGt5zsE9ibWxfbATB33Q55' + \
-      '/7O954L93DJqZhqzLO8vkJeA0534RF1Y+pGG3bUoPiVycARHM7iMbMpr/Cyj7mT' + \
-      'fPpdndApUaEcuIHxTRyohfmEW2PUNwWqsCfiTsrUBsU76X6LS+N87AiqcTThAQ5' + \
-      '1Ccn0OjA1yotfQI8Z3MYiBv8Qkul9geEyb36AKhQCSzi2RZBMz1NOnKUVQcTlHk' + \
-      'DgOC5CWO1mGft7AIJ3TQ5GgVM9hMCBfYxEuNBDCEiYjDCED4HrgdIutgdKuIq3b' + \
-      'ftrgYmU/pT+wAQW2vLLKVdShtpqXEMzUFJlep7d653kETsr3KsyncXiNdO7wkzM' + \
-      '3SV2rFejQTHmZu5riElj0ry+vza9/4P+YVDMQvzzO+kNyPeBWK4zkAVq7F1dftl' + \
-      'KUB1WuF1noEExYQYCT/OCOv4ZnjAcUUXfmtQKzp3Jea0dOxpjMWE08BBNfEaccD' + \
-      '4vBL4BC1BjXztbajkAAAAASUVORK5CYII='
+green = 'iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+g' + \
+        'vaeTAAABXklEQVQ4jdXTP2tUQRSG8d/cmIB/QbCLWxgUYcWFiCBmRY2NRdTeRklh' + \
+        '4ScQ8gXsTBTTWBi1sLKwCdiod2RBC9uIlZXaRNIZFBaPhRsw7q65K9v4VMPMe57z' + \
+        'NkMVSktK96pEt1USJocq5f4qfGvUVyeFw8J+ULqG98Jr09q9d//Jc+NGzOEy9vZZ' + \
+        'tyZ5bMRNp3zuLyzNYhHb+zbfzLrkujMebVwUv8nmcH8AGewQHspubG6YXRKedjWu' + \
+        'TvjhonOWkxVjVq3g4D/KNvhgXb2wamYIMpiw0/lCmBmC7BfhQiE5INyWNHy3S3JM' + \
+        'WEQbH3FF0lA4IrmKT523O8JkZ6YhWZBM8Eq957YXmrIayJ4pLXfONdlUz5l+ri6y' + \
+        'lqxVJVpsHRmM/1H40nFZyxt7hiNkn9D0TROEQqgJa1WE3X+3Zbe2dxjDE9RxVpg1' + \
+        '7cHgQsiOYl44gS+Su067JYmthD8BML5Xrn1Fjy8AAAAASUVORK5CYII='
 
-green = 'iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAABmJLR0QA/wD/AP+' + \
-        'gvaeTAAABp0lEQVRIie3WwWpTQRTG8d9cgwW1m6hVKYItblXcWNBota0Uu+lLKK' + \
-        '5FEEGwXbj1DUR8AREXCkI1NykJVAtd6M6FYBEloi5cScO9LtLEWBvbGxtB8FsN5' + \
-        '8w5/znDzJkhq2IlsRdZw3KZQZzpIkbUTVA32riiqrxvpgRHcLhlj92Xeo1X+jx2' + \
-        '0uffpQkdPUUFwQ1MbGJBdcxJ3DKmsjlQ0R6RO1LTGyTvpAfqLpnwqTOo7KjEQxz' + \
-        'qEtLUG8G0US9/BT01aJsFDP4hpKkPckYUvP0BKsoJFnFsiyBNLUmdcE69cbwjl3' + \
-        'sAgeO4CGG1mmXs7wEI3qs5GAlO9xACB+xzKsKFHkIaSkxFGMJHwXXBsF22C4ZxF' + \
-        'e/appcFk1L9Uv2CScy3+ZelrkgNteW4hlpjXDJjzu51V/LETkX3lMy0bGu7d9Gs' + \
-        '2F2LdqyboyovdjP7NsRSsTRr2F/r3v9B/zIoNi/+6Z70CNRoiAUVAy1L2d7V0de' + \
-        'tBDWe5BW3VQyoykvMguB5VlDnP8MzIyIl9K3xrGDc2Wzb2rmiMQsSo4JHqOELYo' + \
-        'nzWSHwHeCSY18iEoD8AAAAAElFTkSuQmCC'
+red = 'iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABmJLR0QA/wD/AP+g' + \
+      'vaeTAAABY0lEQVQ4jdXUv2vTQRjH8ddd24C1FgS32qFBKVRaSXGxWXRy8MfuYung' + \
+      '0LmD0H/AVQsuDv4anBxcCg6OAR2kuVgqmXRRxyxCKbT2HNKAtol+U7L4mY7nPs/7' + \
+      'eY7n7iigxNMGj4t4h4uYcD4XNPYEfmCkxOWfTOMs1LkbabZ4d5W9bnnhcCAxEVjN' + \
+      '3MbpHvVaeLnP/Xm+9wQmlvAIJ/52rN+0HVi+yItOIHYWDVbxpA8YjGaeJ+790WGD' + \
+      'W5nXhzvuQzlzs8J62KK0yxbOHRPW0eeTzMRdrg8ABuVtrkVt4KB0I2Iq8zAyFxjD' + \
+      'vPak9/AVdyJz+1wILOLbwd5aphIYO8h9kCnbYKZbqTrVTSYh8abBOmwyWWehW04v' + \
+      '1hElaolaEW/8t6U//YfADS4lau8ZHwhwiDOojlKFTAztabeKAI+83SandviEUuBV' + \
+      'bl+FK5mlCs+O07WPzCbeJn4kviRWcsGP4xczKFY6tfyQCAAAAABJRU5ErkJggg=='
 
 try:
     status = loads(get('https://garoahc.appspot.com/status').content)['open']
@@ -68,7 +61,7 @@ try:
 except ConnectionError:
     img = gray
 
-print(f"|image={img} imageWidth=26, imageHeight=26")
+print(f"|image={img}")
 print('---')
 print('Visite nosso site | href=https://garoa.net.br')
 print('Atualizar status | refresh=true')
