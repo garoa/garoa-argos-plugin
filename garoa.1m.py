@@ -10,7 +10,14 @@
 # <bitbar.image>https://i.imgur.com/OhCj6y1.png</bitbar.image>
 # <bitbar.dependencies>python3,requests,json</bitbar.dependencies>
 
-from requests import get
+from sys import executable
+try:
+    from requests import get
+except ModuleNotFoundError:
+    print('ERRO')
+    print('---')
+    print(f'Clique aqui para instalar `requests`|bash="{executable} '
+           '-m pip install requests" terminal=false refresh=true')
 from requests.exceptions import ConnectionError
 from json import loads
 
