@@ -8,7 +8,7 @@ Plugin para a extensão Argos, do Gnome Shell, que permite saber quando o Garoa 
 ```
 $ cd ~/.config/argos
 $ wget "https://raw.githubusercontent.com/biazzotto/garoa-argos-plugin/master/garoa.1m.py"
-$ wget a+x garoa.1m.py
+$ chmod a+x garoa.1m.py
 ```
 
 ### Instalação no BitBar, caso queira tentar:
