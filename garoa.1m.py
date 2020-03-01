@@ -12,7 +12,7 @@
 # <bitbar.dependencies>python3,requests</bitbar.dependencies>
 
 try:
-    from requests3 import get
+    from requests import get
     from requests.exceptions import ConnectionError
 except ModuleNotFoundError:
     print('ERRO')
@@ -59,7 +59,7 @@ try:
     if status:
         img = green
     else:
-        img = green
+        img = red
 except ConnectionError:
     img = gray
 
