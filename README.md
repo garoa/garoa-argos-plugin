@@ -1,7 +1,11 @@
 # Garoa Hacker Clube Status
-Plugin para a extensão Argos do Gnome Shell, possivelmente também compatível com o BitBar, para MacOS
+Plugin para a extensão Argos, do Gnome Shell.
 
-[Instale no BitBar](bitbar://openPlugin?title=Garoa%20Hacker%20Clube%20Status&src=https://raw.githubusercontent.com/biazzotto/garoa-argos-plugin/master/garoa.1m.py)
+Permite saber quando o Garoa Hacker Clube estiver aberto.
 
-# Ícone utilizado
-[Umbrella](https://icons8.com.br/icons/set/umbrella) por [Icons8](https://icons8.com.br)
+Caso queira tentar utlizá-lo com o BitBar, no MacOS, copie e cole este endereço no navegador:
+```bitbar://openPlugin?title=Garoa%20Hacker%20Clube%20Status&src=https://raw.githubusercontent.com/biazzotto/garoa-argos-plugin/master/garoa.1m.py```
+
+
+### Ícone utilizado
+[Ícone Umbrella](https://icons8.com/icon/389/umbrella), por [Icons8](https://icons8.com.br).
