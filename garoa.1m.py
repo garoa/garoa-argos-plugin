@@ -17,7 +17,7 @@ try:
 except ModuleNotFoundError:
     print('ERRO')
     print('---')
-    print('Clique aqui para instalar <hh>requests</hh>.|bash="sudo python3'
+    print('Clique aqui para instalar <tt>requests</tt>.|bash="sudo -H python3'
           ' -m pip install requests&&exit" terminal=true refresh=true')
 
 from json import loads
