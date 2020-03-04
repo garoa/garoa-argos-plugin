@@ -11,7 +11,7 @@ $ wget "https://raw.githubusercontent.com/biazzotto/garoa-argos-plugin/master/ga
 $ chmod a+x garoa.1m.py
 ```
 
-### Instalação no BitBar, caso queira tentar:
+### Instalação no BitBar, caso queira tentar (para macOS):
 1. [Instale o BitBar](https://getbitbar.com/).
 2. Em seguida, clique no botão:
 [![Adicionar ao BitBar](https://img.shields.io/static/v1?style=for-the-badge&logo=addthis&message=Adicione+ao+BitBar&color=green&logoColor=white&label=&link="https://bit.do/garoa-1m-py")](https://bit.do/garoa-1m-py)
