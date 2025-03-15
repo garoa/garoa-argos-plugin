@@ -55,7 +55,7 @@ red = 'iVBORw0KGgoAAAANSUhEUgAAABQAAAASCAYAAABb0P4QAAABb0lEQVQ4y63UO2tU' + \
       'rZ8wN4cVVgPTiRY2EvOBG0We/BtUr2OKb+a2RgAAAABJRU5ErkJggg=='
 
 try:
-    status = loads(get('https://garoahc.appspot.com/status').content)['open']
+    status = loads(get('https://garoa.net.br/status/spaceapi.json').text)['state']['open']
     if status:
         img = green
     else:
